@@ -393,3 +393,36 @@
 .live-stats-table th.live-stats-player .avatar,.summary-player .avatar{display:block;margin:0 0 13px 0}
 .live-stats-table th.live-stats-player span,.summary-player span{display:block;line-height:1.45}
 .summary-player .avatar{margin-bottom:13px}
+
+/* ============================================================
+   RÜFNER BEER PONG — WEIHNACHTS-EDITION 2026
+   Nur CSS. Zum Entfernen wieder die normale style.css hochladen.
+   ============================================================ */
+
+/* Winterliche Grundstimmung ohne Änderung der Spielfläche */
+body{background:radial-gradient(circle at 12% 0%,#274a48 0,transparent 35%),radial-gradient(circle at 92% 3%,#3a2839 0,transparent 32%),#101b25}
+
+/* Dezente Schneeflocken, ausserhalb der Spielinteraktion */
+body::before{content:"❄   ✦       ❅       ·       ❄       ✧       ❅       ❄       ·       ✦       ❅";position:fixed;inset:0 0 auto;min-height:100vh;z-index:90;pointer-events:none;white-space:pre-wrap;overflow:hidden;color:#e0f4ff30;font-size:clamp(18px,3vw,28px);letter-spacing:clamp(12px,4vw,44px);line-height:4.8;animation:ruefner-snow 24s linear infinite;user-select:none}
+@keyframes ruefner-snow{from{transform:translateY(-28vh)}to{transform:translateY(105vh)}}
+@media(prefers-reduced-motion:reduce){body::before{animation:none;opacity:.35}}
+
+/* Lichterkette am oberen Rand des Headers */
+.top{position:relative;padding-top:18px}
+.top::before{content:"";position:absolute;top:0;left:0;right:0;height:12px;pointer-events:none;background:radial-gradient(circle at 8px 6px,#ffdb68 0 3px,transparent 4px) 0 0/64px 12px repeat-x,radial-gradient(circle at 40px 6px,#f66d78 0 3px,transparent 4px) 0 0/64px 12px repeat-x;filter:drop-shadow(0 0 4px #ffe1a0aa)}
+.brand span{color:#ffd58b}
+
+/* Weihnachtsmützen auf sämtlichen vorhandenen Spieler-Avataren.
+   Bilder bleiben unverändert; keine zusätzliche HTML-/JS-Datei nötig. */
+.avatar{position:relative;overflow:visible;isolation:isolate}
+.avatar img{border-radius:50%;display:block}
+/* Rote Zipfelmütze mit weissem Rand und Bommel */
+.avatar::before{content:"";position:absolute;z-index:3;left:-12%;top:-35%;width:84%;height:48%;background:linear-gradient(145deg,#f54e55,#ad1529);clip-path:polygon(7% 100%,28% 27%,61% 0,96% 100%);transform:rotate(-17deg);filter:drop-shadow(0 2px 2px #0008);pointer-events:none}
+.avatar::after{content:"";position:absolute;z-index:4;left:-15%;top:3%;width:88%;height:18%;border-radius:50px;background:linear-gradient(#fff,#dbe7ed);transform:rotate(-17deg);box-shadow:0 1px 3px #0007;pointer-events:none}
+.avatar img{border-radius:50%;display:block}
+/* Festliche Details auf Startseite und Kacheln */
+.hero,.card,.panel{border-color:#45615c}
+.action:hover{border-color:#e9b86d}
+.eyebrow{color:#f4d68d}
+
+/* Spieltisch, Becher und Bedienelemente bewusst nicht verändern */
