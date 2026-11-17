@@ -16,12 +16,10 @@ if (!window.RUEFNER_SUPABASE?.url) {
   requireProfile=function(){if(!db.current||!player(db.current)){go('profiles');return false;}return true;};
   saveFriendlyOnline=async function(){return;};
   allOnlineStatResults=function(){return db.games.filter(g=>['friendly','king'].includes(g.kind)).map(g=>({client_match_id:g.id,player_a:g.a,player_b:g.b,winner:g.winner,side_a:g.sides?.[0],side_b:g.sides?.[1],played_at:g.date,kind:g.kind}));};
-  cloudStatsTable=function(){
-    const results=allOnlineStatResults().filter(g=>inStatsPeriod(g.played_at));
-    const rows=db.players.filter(p=>!p.isDeleted).map(p=>{const games=results.filter(g=>g.player_a===p.id||g.player_b===p.id);return {p,games:games.length,wins:games.filter(g=>g.winner===p.id).length};});
-    return `<div class="section"><h2>📊 Lokale Teststatistik</h2></div>${periodControls()}<div class="panel"><div class="table-wrap"><table class="table"><thead><tr><th>Spieler</th><th>Spiele</th><th>Siege</th></tr></thead><tbody>${rows.map(r=>`<tr><td><button class="stats-player-link" onclick="openPlayerStats('${esc(r.p.id)}')">${avatar(r.p.id)} ${esc(r.p.name)}</button></td><td>${r.games}</td><td>${r.wins}</td></tr>`).join('')}</tbody></table></div></div>`;
-  };
+  // Original-Statistikansicht beibehalten; nur Datenquelle lokal ersetzen.
+  onlineDirectoryLoaded=true; onlineDirectoryLoading=false; onlineDirectoryError='';
+  cloudResultsLoaded=true; cloudResultsLoading=false; cloudResultsError='';
+  plLoaded=true; plLoading=false; plError='';
   friendship=function(){return `<div class="section"><h2>🏓 Freundschaftsspiel · Test</h2></div><div class="panel">${pairPicker()}${btn('Spiel starten','startFriendly()')}</div>`;};
-  header=function(){return `<div class="top"><div class="brand" onclick="go('home')" style="cursor:pointer"><span class="brand-lines"><span class="brand-main">Rüfner</span><span class="brand-accent">Beer Pong · TEST</span></span></div><div class="top-actions">${btn('☰ Menü',"go('home')",'secondary')}</div></div>`;};
   render();
 }
