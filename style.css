@@ -1,0 +1,395 @@
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#f4f6f8;background:#101b25}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 90% 0%,#243a46 0,transparent 38%),#101b25}button,input,select{font:inherit}button{cursor:pointer;border:0}.shell{max-width:1020px;margin:auto;padding:22px 18px 75px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:30px}.brand{font-weight:900;letter-spacing:-1px;font-size:clamp(23px,5vw,36px)}.brand span{color:#ffb84d}.muted{color:#9aadb9}.tiny{font-size:12px}.pill{border:1px solid #3c5260;border-radius:50px;padding:7px 12px;font-size:12px;color:#d5e1e7}.hero{padding:26px;border-radius:22px;background:linear-gradient(125deg,#243d49,#172732);border:1px solid #38515d;margin-bottom:22px}.hero h1{font-size:clamp(28px,5vw,44px);margin:8px 0}.hero p{max-width:580px;line-height:1.5}.eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;color:#ffbf5e;text-transform:uppercase}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.card{background:#1b2b36;border:1px solid #334854;border-radius:18px;padding:20px;box-shadow:0 8px 30px #0002}.action{text-align:left;color:inherit;transition:transform .15s,border-color .15s;width:100%}.action:hover{transform:translateY(-3px);border-color:#ffb84d}.action .emoji{font-size:34px}.action h3{font-size:21px;margin:15px 0 5px}.action p{color:#afbec7;margin:0;line-height:1.5}.btn{background:#ffb84d;color:#17232a;padding:11px 16px;border-radius:11px;font-weight:800}.btn.secondary{background:#304651;color:#e8f0f5}.btn.danger{background:#65353b;color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.between{justify-content:space-between}.section{margin:24px 0 13px}.section h2{margin:0}.panel{background:#1b2b36;border:1px solid #334854;border-radius:18px;padding:18px;margin:12px 0}.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}.field label{font-size:13px;color:#c0d0d8}.field input,.field select{width:100%;border:1px solid #49606c;background:#101e27;color:white;border-radius:11px;padding:12px}.field input[type=file]{padding:8px}.player{display:flex;gap:9px;align-items:center}.avatar{width:42px;height:42px;display:grid;place-items:center;background:#405763;border-radius:50%;font-weight:800;overflow:hidden;flex:none}.avatar img{width:100%;height:100%;object-fit:cover}.cupfield{position:relative;min-height:265px;background:linear-gradient(145deg,#244d48,#163831);border:1px solid #396c5c;border-radius:20px;margin:14px 0;padding:16px;display:flex;justify-content:center;align-items:center}.cups{position:relative;width:290px;height:230px;max-width:100%}.cup{position:absolute;transform:translate(-50%,-50%);width:47px;height:47px;border-radius:50%;background:#f7d4a5;border:5px solid #f7f4e9;box-shadow:inset 0 0 0 7px #dc714d,0 4px 8px #0005;color:#24323a;font-size:12px;font-weight:900;transition:.15s}.cup:hover{filter:brightness(1.15)}.cup.selected{background:#ffe269;border-color:#ffde5e;box-shadow:0 0 0 4px #ffde5e55}.cup.candidate{box-shadow:0 0 0 5px #f9c44b88;animation:pulse 1s infinite}.cup.pending{border-color:#68e5e3}.cup:disabled{cursor:default;opacity:.8}.score{font-size:28px;font-weight:900}.badge{display:inline-block;padding:5px 9px;border-radius:8px;background:#3a515d;font-size:12px}.notice{padding:12px 14px;background:#2d4852;border-left:3px solid #ffb84d;border-radius:8px;margin:10px 0}.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.matchgrid .cupfield{min-height:260px}.matchgrid .cups{transform:scale(.8)}.matchgrid .cup{width:47px;height:47px}.table{width:100%;border-collapse:collapse;font-size:14px}.table th,.table td{text-align:left;padding:12px 8px;border-bottom:1px solid #354955}.table th{color:#9cb2bd;font-size:12px}.table-wrap{overflow:auto}.stat{padding:18px;border-radius:14px;background:#263b46;flex:1;min-width:120px}.stat strong{font-size:25px;display:block}.stat span{font-size:12px;color:#afc0c8}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tabs button{padding:10px 12px;border-radius:10px;background:#304550;color:#fff}.tabs button.active{background:#ffb84d;color:#18232b;font-weight:800}details{background:#1c303b;border-radius:12px;padding:14px;margin:8px 0}summary{font-weight:700;cursor:pointer}details p{line-height:1.6;color:#c8d4db}footer{margin-top:45px;color:#77909f;font-size:12px;text-align:center}@keyframes pulse{50%{filter:brightness(1.3)}}@media(max-width:650px){.shell{padding:14px 12px 55px}.matchgrid{grid-template-columns:1fr}.matchgrid .cupfield{min-height:225px}.matchgrid .cups{transform:scale(.85)}.card{padding:16px}.top{margin-bottom:18px}.table{font-size:12px}.table th,.table td{padding:9px 5px}}
+
+/* Spielfeld: beide Dreiecke stehen sich gegenüber, mobil ohne seitliches Scrollen. */
+.matchstack{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:3px}.matchstack .cupfield{margin:0;min-height:0;height:clamp(155px,24vh,235px);padding:0;touch-action:manipulation}.matchstack .cups{width:290px;height:230px;max-width:none;transform:scale(.68);transform-origin:center center;flex-shrink:0}.matchstack .board-top{transform:scale(.68) rotate(180deg)}.matchstack .board-top .cup{transform:translate(-50%,-50%) rotate(180deg)}.board-label{text-align:center;font-size:13px;color:#c7d8df;font-weight:700;padding:3px}.board-divider{text-align:center;font-size:18px;line-height:20px}.match-notice{font-size:14px}.match-summary{padding:12px}.match-summary .score{font-size:20px}.game-actions{margin-top:12px}.game-actions .btn{font-size:13px;padding:10px 12px}.match-stats{font-size:12px}
+@media(max-width:650px){.matchstack .cupfield{height:clamp(150px,23vh,205px)}.matchstack .cups{transform:scale(.58)}.matchstack .board-top{transform:scale(.58) rotate(180deg)}.matchstack .cup{width:47px;height:47px}.match-summary .avatar{width:30px;height:30px}.match-summary .score{font-size:17px}.section:has(+ .match-summary){margin:8px 0}.matchstack .board-label{font-size:12px}.match-notice{margin:7px 0;padding:9px}.match-stats{padding:10px}}
+
+/* V1.3: ein durchgehender Tisch, feste Spielerpositionen, seitliche Steuerung */
+.game-screen{max-width:640px;margin:auto}.game-title{margin:6px 0}.game-title h2{font-size:19px}.game-title .btn{padding:7px 11px;font-size:12px}.game-screen .match-summary{margin:5px 0;padding:8px 12px}.game-screen .match-summary .score{font-size:16px}.game-screen .match-notice{margin:6px 0;padding:7px 10px;font-size:12px}.table-with-actions{display:grid;grid-template-columns:minmax(0,1fr) 52px;gap:8px;align-items:center}.matchstack{width:100%;max-width:520px;gap:0;display:flex;position:relative;padding:4px 5px;border:7px solid #845738;border-radius:22px;background:linear-gradient(100deg,#103e40,#175457 47%,#103c3f);box-shadow:inset 0 0 0 2px #b18b5b,0 12px 30px #0006}.matchstack .cupfield{width:100%;height:clamp(150px,27vh,220px);min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent}.matchstack .cups{width:290px;height:230px;max-width:none;flex-shrink:0;transform:scale(.62);transform-origin:center}.matchstack .board-top{transform:scale(.62) rotate(180deg)}.matchstack .board-top .cup{transform:translate(-50%,-50%) rotate(180deg)}.table-side-label{text-align:center;color:#f4f6f8;font-weight:800;font-size:12px;padding:2px}.table-middle-line{height:1px;width:75%;margin:auto;background:#c6e1d566}.game-actions{display:flex;flex-direction:column;align-items:stretch;gap:8px;align-self:center}.game-actions .action-icon{padding:10px 4px;font-size:20px;min-width:44px;min-height:44px}.cup.red{background:#ffb2b3;box-shadow:inset 0 0 0 7px #c72f41,0 4px 8px #0005}.cup.blue{background:#a9d4ff;box-shadow:inset 0 0 0 7px #2373d4,0 4px 8px #0005}.cup.candidate{box-shadow:0 0 0 5px #f9c44b99}.cup.pending{border-color:#68e5e3}.rerack-panel{margin:8px 0;padding:12px}.rerack-panel h3{margin:0 0 8px}.formation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin:8px 0}.formation-choice{background:#294650;border:2px solid #486a74;border-radius:12px;padding:4px;min-height:78px}.formation-choice svg{display:block;width:100%;height:90px}.formation-choice:hover{border-color:#ffb84d}.game-screen .match-stats{padding:8px;font-size:11px;margin:8px 0}.finish-panel{margin:8px 0}.finish-panel h2{margin:0 0 8px}.finish-panel .btn{margin:4px}
+@media(max-width:650px){.shell:has(.game-screen){padding:8px 9px 20px}.shell:has(.game-screen) .top{margin-bottom:8px}.shell:has(.game-screen) .top .brand{font-size:22px}.game-screen .match-summary .avatar{width:26px;height:26px}.matchstack{border-width:5px}.matchstack .cupfield{height:clamp(132px,25vh,188px)}.matchstack .cups{transform:scale(.54)}.matchstack .board-top{transform:scale(.54) rotate(180deg)}.table-with-actions{grid-template-columns:minmax(0,1fr) 46px;gap:5px}.game-actions .action-icon{min-width:40px;min-height:40px;font-size:18px;padding:8px 2px}.game-screen .match-summary .score{font-size:14px}.game-screen .match-summary .player{font-size:12px}}
+@media(max-height:740px) and (max-width:650px){.matchstack .cupfield{height:125px}.matchstack .cups{transform:scale(.49)}.matchstack .board-top{transform:scale(.49) rotate(180deg)}.game-screen .match-summary .row{gap:4px}.game-screen .match-notice{padding:5px 8px}}
+
+/* V1.4 – volle Tischbreite: die Bedienung liegt auf der freien Tischfläche. */
+.table-with-actions{display:block}
+.matchstack{max-width:580px;width:100%;padding-bottom:4px}
+.game-actions{position:absolute;left:7px;top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:7px;margin:0}
+.game-actions .action-icon{min-width:38px;min-height:38px;padding:6px 4px;font-size:19px;background:#183a40d9;border:1px solid #6e9b9d99;color:white;box-shadow:0 2px 6px #0004}
+.matchstack .cupfield{height:clamp(175px,28vh,235px)}
+.matchstack .cups{transform:scale(.78)}
+.matchstack .board-top{transform:scale(.78) rotate(180deg)}
+.matchstack .cup{width:50px;height:50px}
+@media(max-width:650px){
+ .matchstack{border-width:5px}
+ .matchstack .cupfield{height:clamp(155px,25vh,205px)}
+ .matchstack .cups{transform:scale(.67)}
+ .matchstack .board-top{transform:scale(.67) rotate(180deg)}
+ .matchstack .cup{width:53px;height:53px}
+ .game-actions{left:3px;gap:5px}
+ .game-actions .action-icon{min-width:34px;min-height:34px;font-size:17px;padding:4px 2px}
+}
+@media(max-height:740px) and (max-width:650px){
+ .matchstack .cupfield{height:clamp(136px,23vh,170px)}
+ .matchstack .cups{transform:scale(.61)}
+ .matchstack .board-top{transform:scale(.61) rotate(180deg)}
+}
+
+/* V1.5: Spielfeld aufräumen, grosse Becher mit sichtbarem Abstand */
+.game-screen{max-width:760px}
+.game-screen .match-stats{display:none}
+.matchstack{max-width:700px}
+.matchstack .cupfield{height:clamp(188px,29vh,258px)}
+.matchstack .cups{transform:scale(.89)}
+.matchstack .board-top{transform:scale(.89) rotate(180deg)}
+.matchstack .cup{width:47px;height:47px;border-width:4px;box-shadow:inset 0 0 0 6px #dc714d,0 4px 8px #0005}
+.matchstack .cup.red{box-shadow:inset 0 0 0 6px #c72f41,0 4px 8px #0005}
+.matchstack .cup.blue{box-shadow:inset 0 0 0 6px #2373d4,0 4px 8px #0005}
+.matchstack .cup.candidate{box-shadow:0 0 0 5px #f9c44b99}
+.rerack-backdrop{position:fixed;inset:0;z-index:80;background:#07151cbb;display:grid;place-items:center;padding:16px;overflow:auto}
+.rerack-backdrop .rerack-panel{width:min(560px,100%);max-height:90dvh;overflow:auto;margin:0;padding:18px;background:#203640;border:2px solid #6c959b;box-shadow:0 20px 60px #000a}
+.rerack-backdrop .rerack-panel h3{font-size:23px;text-align:center;margin:0 0 15px}
+.rerack-backdrop .formation-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px}
+.rerack-backdrop .formation-choice{min-height:105px}
+.rerack-backdrop .formation-choice svg{height:110px}
+.trick-flash{position:fixed;inset:0;z-index:90;display:grid;place-items:center;pointer-events:none;background:#06151e80;animation:flashEnter .4s ease-out both}
+.trick-flash-inner{text-align:center;padding:24px 20px;width:min(95vw,580px);border-radius:24px;background:linear-gradient(135deg,#2a1c42ee,#53351bee);border:3px solid #ffd06a;box-shadow:0 0 50px #ffc64e77;animation:trickGlow 1.1s ease-in-out infinite alternate}
+.trick-flash-title{font-size:clamp(34px,9vw,66px);font-weight:1000;color:#ffe18b;text-shadow:0 0 22px #ffb84d;letter-spacing:1px}
+.trick-flash-task{font-size:clamp(23px,6vw,39px);font-weight:900;color:white;margin-top:14px}
+@keyframes flashEnter{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes trickGlow{from{box-shadow:0 0 25px #ffbd4877}to{box-shadow:0 0 65px #ffd86ccc}}
+@media(max-width:650px){
+ .game-screen .match-notice{font-size:12px}
+ .matchstack .cupfield{height:clamp(163px,26vh,210px)}
+ .matchstack .cups{transform:scale(.74)}
+ .matchstack .board-top{transform:scale(.74) rotate(180deg)}
+ .matchstack .cup{width:47px;height:47px}
+ .rerack-backdrop .formation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:370px){.matchstack .cups{transform:scale(.67)}.matchstack .board-top{transform:scale(.67) rotate(180deg)}}
+@media(max-height:740px) and (max-width:650px){.matchstack .cupfield{height:clamp(145px,24vh,185px)}}
+
+/* V1.6: COM-Trickshot-Auswahl immer über dem Spielfeld */
+.trick-choice-backdrop{position:fixed;inset:0;z-index:110;background:rgba(3,12,18,.84);display:grid;place-items:center;padding:14px;overscroll-behavior:contain}
+.trick-choice-modal{width:min(540px,100%);max-height:calc(100dvh - 28px);overflow:auto;background:linear-gradient(155deg,#18363d,#0d202b);border:2px solid #d6aa55;border-radius:20px;padding:20px;box-shadow:0 20px 80px #000b;text-align:center}
+.trick-choice-title{font-size:clamp(24px,6vw,38px);font-weight:900;color:#ffdd85;text-shadow:0 0 24px #ffb93a99}
+.trick-choice-modal p{margin:8px 0 18px}
+.trick-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.trick-choice-grid .btn{white-space:normal;min-height:52px;padding:10px 7px}
+@media(max-width:380px){.trick-choice-modal{padding:12px}.trick-choice-grid{gap:6px}.trick-choice-grid .btn{font-size:13px;min-height:46px}}
+/* V3.0 – kompakte Statistik auf dem Smartphone */
+.compact-stats{width:100%;table-layout:fixed}
+.compact-stats th:first-child,.compact-stats td:first-child{width:43%;text-align:left}
+.compact-stats th:not(:first-child),.compact-stats td:not(:first-child){text-align:center}
+.compact-stats td,.compact-stats th{padding:12px 6px}
+.compact-stats td .btn{max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:left;padding:10px 8px;font-size:clamp(11px,3vw,14px)}
+@media(max-width:440px){.compact-stats th,.compact-stats td{font-size:12px;padding:9px 3px}.compact-stats td .btn{font-size:12px}}
+
+/* V3.1: kompakte Startseite, grosse gut erreichbare 3D-Becher */
+.welcome-mini{display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:10px 2px;font-size:clamp(16px,4vw,20px)}
+.welcome-mini .avatar{width:38px;height:38px}
+/* Dunkler, breiter Spieltisch ohne Mittelspalt. */
+.game-screen{max-width:780px}
+.matchstack{max-width:740px;padding:7px 4px;border:5px solid #546a7b;border-radius:24px;background:repeating-linear-gradient(143deg,rgba(72,112,143,.12) 0 13px,transparent 13px 31px),linear-gradient(145deg,#152b43,#101d33 55%,#1a344a);box-shadow:inset 0 0 0 2px #a4b4c066,0 14px 34px #0009}
+.matchstack .cupfield{height:clamp(245px,34vh,300px);overflow:visible}
+.matchstack .cups{transform:scale(1.10)}
+.matchstack .board-top{transform:scale(1.10) rotate(180deg)}
+.matchstack .cup{width:53px;height:60px;border:0;border-radius:0;background:transparent!important;box-shadow:none!important;overflow:visible;isolation:isolate;touch-action:manipulation;filter:drop-shadow(0 6px 4px #0008)}
+.matchstack .cup::before{content:"";position:absolute;z-index:0;left:3px;right:3px;top:10px;bottom:2px;clip-path:polygon(0 0,100% 0,85% 100%,15% 100%);background:linear-gradient(90deg,#6f1529,#ed5665 26%,#d52243 64%,#79172b);border-radius:0 0 9px 9px}
+.matchstack .cup::after{content:"";position:absolute;z-index:1;left:1px;right:1px;top:3px;height:24px;border-radius:50%;border:5px solid #ffd5d7;background:radial-gradient(ellipse at 50% 53%,#631522 0 56%,#b92a3c 62%,#e65768 100%);box-shadow:0 2px 2px #0005}
+.matchstack .cup.blue::before{background:linear-gradient(90deg,#113b83,#4da7ff 27%,#1b71d9 64%,#0c3c87)}
+.matchstack .cup.blue::after{border-color:#d5ecff;background:radial-gradient(ellipse at 50% 53%,#103d7d 0 56%,#286fc6 62%,#6db5ff 100%)}
+.matchstack .cup.candidate{filter:drop-shadow(0 0 8px #ffd458) drop-shadow(0 5px 3px #0008)}
+.matchstack .cup.pending{filter:drop-shadow(0 0 9px #6af9f1)}
+.matchstack .cup.selected{filter:drop-shadow(0 0 9px #ffeb59)}
+.matchstack .cup:disabled{opacity:.94}
+.game-actions .undo-icon{font-size:30px;font-weight:900;min-height:52px;min-width:52px;border:2px solid #e8f2f6}
+.table-middle-line{background:transparent}
+@media(max-width:650px){
+ .shell:has(.game-screen){padding-left:5px;padding-right:5px}
+ .matchstack{border-width:4px;padding:4px 2px}
+ .matchstack .cupfield{height:clamp(218px,31vh,280px)}
+ .matchstack .cups{transform:scale(1)}
+ .matchstack .board-top{transform:scale(1) rotate(180deg)}
+ .matchstack .cup{width:53px;height:60px}
+ .game-actions{left:2px}
+ .game-actions .undo-icon{font-size:27px;min-width:43px;min-height:47px}
+ .compact-stats th,.compact-stats td{padding:8px 2px}
+ .compact-stats td .btn{font-size:11px;padding:8px 4px}
+}
+@media(max-width:355px){.matchstack .cups{transform:scale(.91)}.matchstack .board-top{transform:scale(.91) rotate(180deg)}}
+@media(max-height:720px) and (max-width:650px){.matchstack .cupfield{height:clamp(200px,29vh,240px)}}
+
+/* V3.3 – Spielfeld nach der Lieblingsskizze: zwei vollständige Pyramiden. */
+.shell.shell-game{padding:0!important;max-width:100%;}
+.shell-game .game-screen{width:100%;max-width:700px;margin:0 auto;}
+.game-screen .table-with-actions{display:block!important;}
+.game-screen .matchstack{box-sizing:border-box;position:relative;display:flex;flex-direction:column;gap:0;width:100%;max-width:700px;margin:0 auto;padding:0 4px;border:4px solid #50677b;border-radius:0;background:repeating-linear-gradient(145deg,#172b40 0 36px,#132438 36px 74px);box-shadow:inset 0 0 0 2px #92abc233,0 8px 25px #0007;overflow:hidden;}
+.game-screen .matchstack .cupfield{height:clamp(235px,37dvh,350px)!important;min-height:0!important;flex:none;background:transparent;border:0;margin:0;padding:0;display:flex;align-items:center;justify-content:center;overflow:visible;}
+.game-screen .matchstack .cups{width:290px;height:230px;max-width:none;flex-shrink:0;transform:scale(var(--cup-scale,1.07))!important;transform-origin:center;}
+.game-screen .matchstack .board-top{transform:scale(var(--cup-scale,1.07)) rotate(180deg)!important;}
+.game-screen .matchstack .board-top .cup{transform:translate(-50%,-50%) rotate(180deg)!important;}
+.game-screen .matchstack .board-bottom .cup{transform:translate(-50%,-50%)!important;}
+.game-screen .matchstack .cup{box-sizing:border-box;position:absolute;width:49px!important;height:67px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;filter:drop-shadow(0 5px 4px #0008);overflow:visible;opacity:1!important;touch-action:manipulation;transition:filter .15s;}
+.game-screen .matchstack .cup::before{content:"";position:absolute;top:13px;bottom:1px;left:3px;right:3px;z-index:0;clip-path:polygon(0 0,100% 0,84% 100%,16% 100%);border-radius:0 0 9px 9px;background:linear-gradient(90deg,#651323,#e94e62 27%,#ce2740 69%,#751728);}
+.game-screen .matchstack .cup::after{content:"";position:absolute;top:2px;left:0;right:0;height:23px;z-index:1;border:5px solid #ffd5d8;border-radius:50%;background:radial-gradient(ellipse at center,#64111e 0 56%,#a52235 65%,#e84c63 100%);box-shadow:0 2px 3px #0007,inset 0 1px 3px #0008;}
+.game-screen .matchstack .cup.blue::before{background:linear-gradient(90deg,#0b3474,#50a7ff 28%,#1e75d8 67%,#0b377e);}
+.game-screen .matchstack .cup.blue::after{border-color:#d6efff;background:radial-gradient(ellipse at center,#0d397a 0 56%,#2065b6 65%,#68b6ff 100%);}
+.game-screen .matchstack .cup.candidate{filter:drop-shadow(0 0 9px #ffcf54) drop-shadow(0 5px 4px #0008);}
+.game-screen .matchstack .cup.pending{filter:drop-shadow(0 0 9px #6af9f1);}
+.game-screen .matchstack .cup:focus-visible{outline:3px solid #fff;outline-offset:4px;}
+.game-screen .table-side-label{z-index:4;position:relative;display:flex;align-items:center;gap:9px;justify-content:flex-start;min-height:61px;padding:8px 64px 8px 16px;background:transparent!important;border:0!important;font-size:clamp(16px,4.2vw,22px);text-align:left;color:#e9f3fa;text-shadow:0 2px 6px #000a;}
+.game-screen .table-side-label .avatar{width:43px;height:43px;flex:none;}
+.game-screen .table-side-label .player-label{min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px;}
+.game-screen .table-side-label strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.game-screen .table-side-label .throw-count{font-size:clamp(12px,3vw,16px);font-weight:600;color:#d7e7f4;}
+.game-screen .table-side-label.player-top.is-active{color:#ff7d91;text-shadow:0 0 12px #ff3e69,0 0 25px #ff3e6966;}
+.game-screen .table-side-label.player-bottom.is-active{color:#7dc8ff;text-shadow:0 0 12px #319dff,0 0 25px #319dff66;}
+.game-screen .table-middle-line{height:0!important;}
+.game-screen .game-actions{position:absolute;z-index:30;top:50%;left:7px;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;pointer-events:auto;}
+.game-screen .game-actions .action-icon{width:clamp(42px,11vw,52px);height:clamp(42px,11vw,52px);min-width:0;min-height:0;padding:0;border:2px solid #87a9c4;border-radius:14px;background:#1c3349e8;color:white;font-size:22px;box-shadow:0 0 10px #58a7e544,0 4px 10px #0007;}
+.game-screen .game-actions .undo-icon{font-size:29px;border-color:#d9edff;box-shadow:0 0 13px #91cbff77;}
+.game-screen .game-actions .action-icon:nth-child(2){border-color:#79c0ff;box-shadow:0 0 12px #5db5ff66;}
+.game-screen .game-actions .action-icon:nth-child(3){border-color:#d1a0ff;box-shadow:0 0 12px #c287ff66;}
+.game-screen .game-actions .action-icon:active{filter:brightness(1.5);}
+.game-screen .game-exit{position:absolute;z-index:31;right:10px;top:10px;width:44px;height:44px;border:2px solid #7291a9;border-radius:50%;background:#243a50de;color:white;font-size:27px;}
+.game-screen .fullscreen-status{position:absolute;z-index:35;left:50%;top:50%;transform:translate(-50%,-50%);width:max-content;max-width:72%;padding:7px 11px;border-radius:24px;background:#081a2cdd;color:#e9f3fa;text-align:center;font-size:12px;pointer-events:none;}
+.game-screen .finish-panel{margin:8px;}
+@media(max-width:650px){.game-screen .matchstack{--cup-scale:clamp(.82,calc((100vw - 24px)/320px),1.15);}.game-screen .table-side-label{min-height:57px;padding-left:12px;}.game-screen .matchstack .cupfield{height:clamp(220px,36dvh,330px)!important;}}
+@media(max-width:360px){.game-screen .matchstack{--cup-scale:.85;}.game-screen .game-actions{left:3px;}}
+@media(max-height:700px) and (max-width:650px){.game-screen .matchstack .cupfield{height:clamp(195px,34dvh,260px)!important;}}
+
+/* V3.5: Aufrechte rote Becher, aktive Namen und Wurftext als eine Neonzeile. */
+.game-screen .matchstack .board-top .cup{transform:translate(-50%,-50%)!important;}
+.game-screen .table-side-label .player-label{display:flex;align-items:center;min-width:0;flex:1;}
+.game-screen .table-side-label .player-status{display:inline-flex;align-items:baseline;gap:5px;min-width:0;max-width:100%;white-space:nowrap;}
+.game-screen .table-side-label .player-status strong{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;}
+.game-screen .table-side-label .throw-count{display:inline;flex:none;font-weight:800;font-size:clamp(12px,3.2vw,17px);color:inherit;}
+.game-screen .table-side-label.player-top.is-active .player-status,
+.game-screen .table-side-label.player-top.is-active .throw-count{color:#ff8ca1!important;text-shadow:0 0 7px #ff426c,0 0 17px #ff426c,0 0 28px #ff426c88;}
+.game-screen .table-side-label.player-bottom.is-active .player-status,
+.game-screen .table-side-label.player-bottom.is-active .throw-count{color:#7dc8ff!important;text-shadow:0 0 7px #319dff,0 0 17px #319dff,0 0 28px #319dff88;}
+.game-screen .table-side-label.is-active .player-status strong{color:inherit;text-shadow:inherit;}
+.game-screen .table-side-label:not(.is-active) .player-status{color:#e9f3fa;text-shadow:0 2px 6px #000a;}
+@media(max-width:390px){.game-screen .table-side-label .player-status{gap:3px}.game-screen .table-side-label strong{font-size:clamp(14px,4vw,18px)}.game-screen .table-side-label .throw-count{font-size:clamp(11px,3vw,14px)}}
+
+/* V3.6 – volle Smartphone-Hoehe, aufrechte Becher, einheitlicher Neon-Status. */
+.game-screen .matchstack{height:calc(100dvh - 8px);min-height:620px;max-height:none;--cup-scale:1.22;}
+.game-screen .matchstack .cupfield{height:auto!important;min-height:0!important;flex:1 1 0;overflow:visible;}
+/* Die obere Pyramide wird durch gespiegelte Y-Koordinaten gezeichnet, NICHT durch Drehen der Becher. */
+.game-screen .matchstack .board-top{transform:scale(var(--cup-scale))!important;}
+.game-screen .matchstack .board-top .cup{transform:translate(-50%,-50%)!important;}
+.game-screen .table-side-label{flex:none;min-height:68px;}
+.game-screen .table-side-label.is-active .avatar{border:3px solid #82caff;box-shadow:0 0 0 2px #78caff55,0 0 14px #44b4ff,0 0 26px #44b4ff66;}
+.game-screen .table-side-label.player-top.is-active .avatar{border-color:#ff8299;box-shadow:0 0 0 2px #ff829955,0 0 14px #ff416e,0 0 26px #ff416e66;}
+.game-screen .table-side-label.is-active .player-status,.game-screen .table-side-label.is-active .player-status strong,.game-screen .table-side-label.is-active .throw-count{font-weight:800!important;color:inherit!important;text-shadow:inherit!important;background:transparent!important;-webkit-text-fill-color:currentColor!important;}
+.game-screen .table-side-label.player-bottom.is-active .player-status,.game-screen .table-side-label.player-bottom.is-active .player-status strong,.game-screen .table-side-label.player-bottom.is-active .throw-count{color:#7dc8ff!important;text-shadow:0 0 7px #319dff,0 0 17px #319dff,0 0 28px #319dff88!important;}
+.game-screen .table-side-label.player-top.is-active .player-status,.game-screen .table-side-label.player-top.is-active .player-status strong,.game-screen .table-side-label.player-top.is-active .throw-count{color:#ff8ca1!important;text-shadow:0 0 7px #ff426c,0 0 17px #ff426c,0 0 28px #ff426c88!important;}
+@media(max-width:650px){
+ .game-screen .matchstack{--cup-scale:clamp(.86,calc((100vw - 20px)/300px),1.32);height:calc(100dvh - 8px);min-height:0;}
+ .game-screen .matchstack .cupfield{height:auto!important;min-height:0!important;flex:1 1 0;}
+ .game-screen .table-side-label{min-height:64px;}
+}
+@media(max-width:360px){.game-screen .matchstack{--cup-scale:clamp(.8,calc((100vw - 20px)/310px),1.1);}}
+@media(max-height:700px) and (max-width:650px){.game-screen .matchstack .cupfield{height:auto!important;min-height:0!important;}}
+
+/* V3.7: only status text glows; never a rectangular highlight. */
+.game-screen .table-side-label.is-active .player-status,.game-screen .table-side-label.is-active .player-status strong,.game-screen .table-side-label.is-active .throw-count{background:none!important;box-shadow:none!important;filter:none!important;outline:0!important;}
+.game-screen .table-side-label.is-active .player-status strong{display:inline!important;padding:0!important;border:0!important;border-radius:0!important;}
+/* Trickshot flash catches and dismisses the next tap; it must not register a throw. */
+.trick-flash{pointer-events:auto!important;cursor:pointer;touch-action:manipulation;}
+/* Profile pictures in the online ranking and individual statistics. */
+.compact-stats td .btn{display:inline-flex;align-items:center;gap:8px;text-align:left;}
+.compact-stats td .avatar{width:33px;height:33px;flex:none;}
+.player-stats-heading{display:flex;align-items:center;gap:10px;}
+.player-stats-heading .avatar{width:48px;height:48px;}
+
+
+/* V3.8 – Neon nur auf den Buchstaben, niemals auf dem Namensbereich. */
+.game-screen .table-side-label.is-active,
+.game-screen .table-side-label.is-active .player-label,
+.game-screen .table-side-label.is-active .player-status {
+  text-shadow:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  background:transparent!important;
+  outline:none!important;
+}
+.game-screen .table-side-label.is-active .player-status strong,
+.game-screen .table-side-label.is-active .throw-count {
+  display:inline!important;
+  background:transparent!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+  padding:0!important;
+}
+.game-screen .table-side-label.player-top.is-active .player-status strong,
+.game-screen .table-side-label.player-top.is-active .throw-count {
+  color:#ff8ca1!important;
+  text-shadow:0 0 7px #ff426c,0 0 17px #ff426c,0 0 28px #ff426c88!important;
+}
+.game-screen .table-side-label.player-bottom.is-active .player-status strong,
+.game-screen .table-side-label.player-bottom.is-active .throw-count {
+  color:#7dc8ff!important;
+  text-shadow:0 0 7px #319dff,0 0 17px #319dff,0 0 28px #319dff88!important;
+}
+
+/* V3.9: Der rechteckige Neon-Rand entsteht durch abgeschnittenen text-shadow.
+   Die Namensschrift darf ihren Leuchtschein ausserhalb der Textbox zeichnen. */
+.game-screen .table-side-label .player-status strong {
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+/* V4.0: Siegeranzeige mittig ueber dem Spielfeld, alle Aktionen direkt im Overlay. */
+.game-screen .victory-overlay{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(4,13,26,.72);backdrop-filter:blur(3px);}
+.game-screen .victory-card{width:min(440px,100%);padding:28px 20px;text-align:center;border:2px solid #ffcf69;border-radius:22px;background:linear-gradient(155deg,#203c55,#102236);box-shadow:0 0 24px #ffc45c77,0 16px 50px #000a;animation:victoryAppear .28s ease-out both;}
+.game-screen .victory-trophy{font-size:56px;line-height:1.2;filter:drop-shadow(0 0 12px #ffcf70);}
+.game-screen .victory-card h2{margin:12px 0;color:#ffe39a;font-size:clamp(25px,7vw,37px);text-shadow:0 0 12px #ffc45b,0 0 28px #ffc45b77;overflow-wrap:anywhere;}
+.game-screen .victory-card p{color:#c8d9e6;font-size:14px;}
+.game-screen .victory-buttons{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.game-screen .victory-buttons .btn{width:100%;min-height:48px;}
+@keyframes victoryAppear{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+
+/* V4.2: Einheitliche Hinweise und Bestätigungen statt Browser-Pop-ups. */
+.app-dialog-backdrop{position:fixed;inset:0;z-index:250;display:grid;place-items:center;background:#06131de0;padding:16px;}
+.app-dialog-card{width:min(440px,100%);border:2px solid #83b7dc;border-radius:20px;background:linear-gradient(150deg,#203a4d,#101e2d);box-shadow:0 0 35px #319dff44,0 24px 65px #000b;text-align:center;padding:24px 20px;color:#f4f6f8;}
+.app-dialog-icon{font-size:38px;margin-bottom:8px;}
+.app-dialog-card h2{margin:0 0 12px;font-size:clamp(23px,5vw,30px);color:#a6d8ff;text-shadow:0 0 14px #319dff66;}
+.app-dialog-card p{white-space:pre-line;line-height:1.5;color:#d7e7f4;margin:0 0 22px;overflow-wrap:anywhere;}
+.app-dialog-buttons{display:flex;flex-direction:column;gap:10px;}
+.app-dialog-buttons .btn{width:100%;min-height:46px;}
+
+/* V4.5 – Online-Spielerprofile */
+.profile-directory{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
+.profile-list-card{display:flex;align-items:center;gap:14px;width:100%;padding:16px;background:#1b2b36;border:1px solid #334854;border-radius:16px;color:#f4f6f8;text-align:left}
+.profile-list-card:hover,.profile-list-card:focus-visible{border-color:#ffb84d}
+.profile-list-card .avatar{width:55px;height:55px}
+.profile-list-name{font-size:17px;font-weight:800;flex:1}
+.profile-list-arrow{font-size:30px;color:#ffb84d}
+.profile-detail{text-align:center;max-width:620px;margin:16px auto}
+.profile-photo-button{display:flex;flex-direction:column;align-items:center;gap:8px;margin:4px auto 12px;background:none;color:#aebfc8}
+.profile-photo-button .avatar{width:118px;height:118px;font-size:42px;border:3px solid #ffb84d}
+.profile-photo-button small{font-size:12px}
+.profile-status{text-align:left;background:#263b46;border-radius:14px;padding:16px;margin:18px 0;overflow-wrap:anywhere}
+.profile-status p{white-space:pre-wrap;line-height:1.5;margin-bottom:0}
+.profile-detail .field{text-align:left}
+.profile-detail textarea{width:100%;background:#101e27;color:#fff;border:1px solid #49606c;border-radius:11px;padding:12px;font:inherit;resize:vertical}
+.profile-zoom-overlay{position:fixed;inset:0;z-index:9999;background:#000e;display:flex;align-items:center;justify-content:center;padding:30px}
+.profile-zoom-overlay img{max-width:95vw;max-height:85vh;object-fit:contain;border-radius:12px}
+.profile-zoom-close{position:absolute;right:18px;top:15px;color:#fff;background:#304651;border-radius:50%;width:44px;height:44px;font-size:22px}
+.profile-zoom-placeholder{font-size:100px;font-weight:900}
+
+/* V4.6 – kompakte Navigation und aufgeräumte Spielerprofile */
+.top{align-items:flex-start}
+.top-actions{display:flex;flex-direction:column;align-items:stretch;gap:7px;flex-shrink:0}
+.top-actions .btn{text-align:center;text-decoration:none;white-space:nowrap;min-width:112px}
+@media(max-width:650px){.top .brand{font-size:clamp(20px,5.5vw,28px);line-height:1.2;padding-top:5px;min-width:0}.top-actions .btn{padding:9px 10px;font-size:13px;min-width:105px}}
+.profile-status{text-align:center;margin:12px 0 18px;padding:12px 14px}
+.profile-status:empty{display:none}
+.profile-status p{margin:0}
+.profile-edit-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:15px}
+.profile-status-editor textarea{width:100%;box-sizing:border-box;background:#101e27;color:#fff;border:1px solid #49606c;border-radius:11px;padding:12px;font:inherit;resize:vertical;margin:10px 0 18px}
+
+/* V4.7: Mobile-Kopfbereich und reduzierte Spielerstatistik */
+.top .brand{display:flex;align-items:flex-start;gap:5px;line-height:1.1;}
+.top .brand-lines{display:flex;flex-direction:column;align-items:flex-start;gap:2px;color:#f4f6f8;}
+.top .brand-lines .brand-main{color:#f4f6f8;}
+.top .brand-lines .brand-accent{color:#ffb84d;}
+.top-actions .btn{padding:12px 16px;min-width:124px;font-size:16px;}
+@media(max-width:650px){.top .brand{font-size:clamp(19px,5vw,27px);letter-spacing:-.7px;}.top-actions .btn{padding:12px 12px;min-width:116px;font-size:15px;}}
+.compact-stats td .stats-player-link{display:inline-flex;align-items:center;gap:8px;background:transparent!important;border:0!important;box-shadow:none!important;color:#f4f6f8;font-weight:750;text-align:left;padding:0!important;margin:0;max-width:100%;min-width:0;font-size:inherit;}
+.compact-stats td .stats-player-link span:last-child{min-width:0;overflow-wrap:anywhere;}
+.compact-stats td .stats-player-link:hover span:last-child{text-decoration:underline;}
+.compact-stats td .stats-player-link .avatar{width:33px;height:33px;flex:none;}
+.stats-back-row{display:flex;justify-content:flex-end;margin:2px 0 12px;}
+.stats-back-row .btn{font-size:13px;padding:7px 11px;}
+.player-stats-intro{margin-top:18px;}
+.player-stats-heading{gap:10px;}
+.stats-avatar-zoom{display:inline-flex;align-items:center;justify-content:center;padding:0;background:transparent;border:0;border-radius:50%;flex:none;}
+.stats-avatar-zoom .avatar{width:48px;height:48px;}
+.player-stats-status{margin:12px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;color:#dbe7ed;font-size:16px;line-height:1.45;}
+
+/* V4.7.1 – Logo auf Mobilgeraeten nutzt die freie Flaeche links */
+@media(max-width:650px){.top .brand{font-size:clamp(27px,8.2vw,38px);letter-spacing:-1px;line-height:1.07;flex:1 1 auto;min-width:0}.top .brand-lines{gap:3px}.top-actions{flex:0 0 auto}}
+
+/* V4.7.2 – Wortmarke ohne Emoji, maximaler Platz links; Navigation unveraendert */
+.top .brand{gap:0;min-width:0;flex:1 1 auto;}
+.top .brand-lines{min-width:0;}
+@media(max-width:650px){
+  .top{gap:8px;}
+  .top .brand{font-size:clamp(32px, 9.4vw, 46px);letter-spacing:-1.4px;line-height:1.02;padding-top:3px;}
+  .top .brand-lines{gap:4px;}
+  .top-actions{flex:0 0 auto;}
+}
+@media(max-width:370px){.top .brand{font-size:clamp(28px, 8.6vw, 35px);}}
+
+/* V4.7.3 – Wortmarke fuellt die Hoehe der rechten Menue/Admin-Spalte.
+   Nur Layout; keine Daten- oder Spielaenderungen. */
+@media (max-width:650px){
+  .top{align-items:stretch;}
+  .top .brand{align-self:stretch;display:flex;align-items:stretch;padding-top:0;font-size:clamp(38px,10.5vw,48px);line-height:1;letter-spacing:-1.6px;}
+  .top .brand-lines{display:flex;flex-direction:column;justify-content:space-between;gap:0;padding:1px 0 3px;}
+}
+@media (max-width:370px){
+  .top .brand{font-size:clamp(31px,9.2vw,38px);letter-spacing:-1.4px;}
+}
+
+/* V4.7.4 – Logo-Zeilen wieder dicht beieinander, etwas groesser.
+   Ausschliesslich Darstellung; Menue/Admin und Daten unveraendert. */
+@media(max-width:650px){
+  .top .brand{align-self:flex-start;align-items:flex-start;font-size:clamp(39px,10.9vw,52px);line-height:.98;letter-spacing:-1.8px;padding-top:0;}
+  .top .brand-lines{justify-content:flex-start;gap:0;padding:0;}
+}
+@media(max-width:370px){
+  .top .brand{font-size:clamp(32px,9.3vw,41px);letter-spacing:-1.5px;}
+}
+
+/* V4.7.5 – Schrift vergroessert, Zeilen bleiben zusammen; nur Mobil-Logo. */
+@media(max-width:650px){
+  .top .brand{font-size:clamp(43px,12vw,56px);line-height:.98;letter-spacing:-2px;}
+  .top .brand-lines{justify-content:flex-start;gap:0;}
+}
+@media(max-width:390px){
+  .top .brand{font-size:clamp(37px,10.7vw,46px);letter-spacing:-1.7px;}
+}
+/* Island: nur bei einem wirklich alleinstehenden gegnerischen Becher aktiv. */
+.game-actions .island-action:disabled{opacity:.33;filter:grayscale(1);cursor:not-allowed;}
+.game-actions .island-action.island-on{background:#ffbb55;color:#14252c;box-shadow:0 0 0 3px rgba(255,187,85,.35),0 0 20px rgba(255,187,85,.45);}
+
+/* King-of-the-Table-Vorschau für reguläre Spieler */
+.kot-locked{opacity:.46;filter:grayscale(.8);cursor:not-allowed!important;pointer-events:none;}
+
+/* Live-Matchstatistik: rechte Lasche und wiederverwendete Endstatistik */
+.matchstack .live-stats-tab{position:absolute;right:5px;top:50%;transform:translateY(-50%);z-index:15;writing-mode:vertical-rl;transform-origin:center;letter-spacing:1.5px;font-size:12px;font-weight:800;color:#d6f0ff;background:linear-gradient(135deg,#284e6d,#19334c);border:1px solid #6698bd;border-radius:11px;padding:15px 9px;min-height:112px;box-shadow:0 0 13px #3c9ad655;cursor:pointer;touch-action:manipulation}
+.matchstack .live-stats-tab:active{background:#3b7299;box-shadow:0 0 22px #65caffaa}
+.live-stats-backdrop{position:fixed;inset:0;z-index:1200;background:#07111bd9;display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box}
+.live-stats-dialog{width:min(100%,560px);max-height:min(92dvh,850px);background:#172b40;border:1px solid #52718d;border-radius:18px;box-shadow:0 20px 70px #000b;display:flex;flex-direction:column;overflow:hidden;color:#f4f8fc}
+.live-stats-heading{display:flex;align-items:center;gap:10px;padding:15px 14px;border-bottom:1px solid #426078}
+.live-stats-heading h2{font-size:clamp(16px,4vw,21px);margin:0;flex:1}
+.live-stats-badge{display:inline-flex;align-items:center;gap:6px;color:#bbf7d0;background:#166534;border:1px solid #22c55e;border-radius:30px;padding:5px 10px;font-size:11px;font-weight:900;letter-spacing:1px}
+.live-stats-dot{width:7px;height:7px;border-radius:50%;background:#86efac;box-shadow:0 0 8px #86efac}
+.live-stats-close{background:#29465f;border:1px solid #688da9;border-radius:50%;width:34px;height:34px;color:white;font-size:19px;cursor:pointer;flex-shrink:0}
+.live-stats-scroll{overflow:auto;overscroll-behavior:contain;padding:8px 10px 14px}
+.live-stats-table{width:100%;table-layout:fixed;text-align:center;margin:0}
+.live-stats-table th{width:30%;overflow-wrap:anywhere;vertical-align:middle}
+.live-stats-table th:nth-child(2){width:40%}
+.live-stats-table th .avatar{vertical-align:middle;margin-right:4px}
+.live-stats-table td:nth-child(2){font-size:.85em;overflow-wrap:anywhere}
+@media(max-width:450px){.matchstack .live-stats-tab{right:3px;padding:12px 6px;font-size:10px;min-height:100px}.live-stats-dialog{max-height:94dvh}.live-stats-table{font-size:12px}.live-stats-table th .avatar{width:25px;height:25px}}
+
+/* Live match statistics: elapsed time and active thrower */
+.live-match-duration{font-variant-numeric:tabular-nums;font-weight:800;font-size:14px;color:#d6e5f2;white-space:nowrap}
+.live-stats-table th.live-stats-player .avatar{display:block;margin:0 auto 10px}
+.live-stats-table th.live-stats-player span{display:block;line-height:1.4}
+.live-stats-table th.live-stats-player.is-throwing.blue .avatar{box-shadow:0 0 0 2px #5fc4ff,0 0 16px #40baff}
+.live-stats-table th.live-stats-player.is-throwing.blue span{color:#6ecaff;text-shadow:0 0 10px #42baffaa}
+.live-stats-table th.live-stats-player.is-throwing.red .avatar{box-shadow:0 0 0 2px #ff808e,0 0 16px #ff4d6c}
+.live-stats-table th.live-stats-player.is-throwing.red span{color:#ff9ca9;text-shadow:0 0 10px #ff5a72aa}
+@media(max-width:450px){.live-stats-heading{gap:7px;padding:12px 10px}.live-match-duration{font-size:12px}.live-stats-heading h2{font-size:16px}.live-stats-badge{padding:4px 7px}}
+
+/* Player photos left aligned above names in both statistics views */
+.live-stats-table th.live-stats-player,.summary-player{text-align:left;vertical-align:top;padding-top:6px}
+.live-stats-table th.live-stats-player .avatar,.summary-player .avatar{display:block;margin:0 0 13px 0}
+.live-stats-table th.live-stats-player span,.summary-player span{display:block;line-height:1.45}
+.summary-player .avatar{margin-bottom:13px}
