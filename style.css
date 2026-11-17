@@ -395,45 +395,42 @@
 .summary-player .avatar{margin-bottom:13px}
 
 
-/* ============================================================
-   RÜFNER — WINTER WONDERLAND 2026 | Nur CSS, keine App-Logik
-   Zum Zuruecksetzen: vorherige style.css wieder hochladen.
-   ============================================================ */
-body{background:radial-gradient(ellipse at 12% 8%,#254c48 0,transparent 38%),radial-gradient(ellipse at 88% 6%,#49313c 0,transparent 37%),#101b25!important}
-/* Schneefall als wiederholbares Muster: laeuft ohne sichtbare Pause */
-body::before{content:"";position:fixed;inset:-100% 0 0;z-index:80;pointer-events:none;opacity:.76;background-image:radial-gradient(circle,#f5fbff 1.7px,transparent 2.6px),radial-gradient(circle,#d5f1ff 1px,transparent 2px),radial-gradient(circle,#fff 2.1px,transparent 3px);background-size:97px 113px,151px 177px,223px 263px;background-position:11px 7px,41px 37px,90px 77px;animation:ruefner-fall 19s linear infinite;will-change:transform}
-@keyframes ruefner-fall{to{transform:translate3d(0,50%,0)}}
-/* Unterer Hintergrund: Winterlandschaft, bleibt hinter allen Bedienelementen */
-body::after{content:"☃️      🎄          ☃️      🎄";position:fixed;bottom:0;left:0;right:0;z-index:0;pointer-events:none;text-align:center;white-space:nowrap;overflow:hidden;font-size:clamp(30px,6vw,65px);letter-spacing:clamp(8px,3vw,40px);opacity:.19;filter:drop-shadow(0 0 14px #d3f5ff)}
+
+/* RÜFNER WEIHNACHTEN V3 — reine Darstellung, keine Spieldaten */
+body{background:radial-gradient(ellipse at 10% 9%,#24473f 0,transparent 43%),radial-gradient(ellipse at 91% 10%,#49313e 0,transparent 42%),#101b25!important}
+/* Zwei nahtlose Schneeschichten: exakt um die Musterhoehe verschoben */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.70;background-image:radial-gradient(circle,#f5fbff 1.2px,transparent 2px),radial-gradient(circle,#d7efff 1.8px,transparent 2.5px),radial-gradient(circle,#fff 1px,transparent 2px);background-size:103px 128px,173px 256px,227px 512px;animation:rp-snow 22s linear infinite}
+@keyframes rp-snow{from{background-position:11px 0,53px 0,91px 0}to{background-position:11px 512px,53px 512px,91px 512px}}
+/* Viele locker verteilte Wintermotive, nicht nur unten */
+body::after{content:"☃️                         🎄               🔔                      🎁                  ☃️                 🎄                      🎁                  🔔";position:fixed;left:0;top:0;right:0;bottom:0;z-index:0;pointer-events:none;white-space:normal;overflow:hidden;word-spacing:clamp(18px,5vw,75px);line-height:clamp(145px,25vh,290px);font-size:clamp(24px,4vw,53px);opacity:.19;text-shadow:0 7px 9px #000,3px 3px 12px #8ce3d3;transform:rotate(-8deg) scale(1.13);filter:saturate(1.25)}
 .shell{position:relative;z-index:1}
-/* Lichterkette am oberen Rand, mit funkelnden Kugeln */
 .top{position:relative;padding-top:27px}
-.top::before{content:"";position:absolute;top:0;left:0;right:0;height:21px;pointer-events:none;border-top:2px solid #789b69;border-radius:0 0 45% 45%;background:radial-gradient(circle at 9px 10px,#ffdd5b 0 4px,transparent 5px) 0 0/76px 19px repeat-x,radial-gradient(circle at 28px 11px,#f35a69 0 4px,transparent 5px) 0 0/76px 19px repeat-x,radial-gradient(circle at 48px 11px,#72dc8a 0 4px,transparent 5px) 0 0/76px 19px repeat-x,radial-gradient(circle at 67px 10px,#8bcaff 0 4px,transparent 5px) 0 0/76px 19px repeat-x;filter:drop-shadow(0 0 5px #ffde84);animation:ruefner-twinkle 2.8s ease-in-out infinite alternate}
-@keyframes ruefner-twinkle{to{filter:drop-shadow(0 0 9px #fff0a8) brightness(1.22)}}
-.brand{position:relative;text-shadow:0 0 16px #ffc66a55}
-.brand span{color:#ffe09b}
-.brand::after{content:"🎄🔔";display:inline-block;margin-left:9px;font-size:.52em;vertical-align:middle;transform:rotate(-10deg);filter:drop-shadow(0 2px 4px #0008)}
-/* Avatare: Mützen ohne Bilddateien zu veraendern */
-.avatar{position:relative;overflow:visible!important;isolation:isolate}
-.avatar img{border-radius:50%;display:block}
+.top::before{content:"";position:absolute;top:0;left:0;right:0;height:21px;pointer-events:none;border-top:2px solid #789b69;border-radius:0 0 45% 45%;background:radial-gradient(circle at 9px 10px,#ffdd5b 0 4px,transparent 5px) 0 0/76px 19px repeat-x,radial-gradient(circle at 28px 11px,#f35a69 0 4px,transparent 5px) 0 0/76px 19px repeat-x,radial-gradient(circle at 48px 11px,#72dc8a 0 4px,transparent 5px) 0 0/76px 19px repeat-x,radial-gradient(circle at 67px 10px,#8bcaff 0 4px,transparent 5px) 0 0/76px 19px repeat-x;filter:drop-shadow(0 0 5px #ffde84);animation:rp-twinkle 2.8s ease-in-out infinite alternate}
+@keyframes rp-twinkle{to{filter:drop-shadow(0 0 9px #fff0a8) brightness(1.22)}}
+.brand{position:relative;text-shadow:0 0 16px #ffc66a55}.brand::after{content:"🎄 🔔 🎁";display:inline-block;margin-left:8px;font-size:.46em;vertical-align:middle;transform:rotate(-9deg);filter:drop-shadow(0 3px 3px #0009)}
+.avatar{position:relative;overflow:visible!important;isolation:isolate}.avatar img{border-radius:50%;display:block}
 .avatar::before{content:"";position:absolute;z-index:4;left:-11%;top:-36%;width:86%;height:49%;background:linear-gradient(135deg,#ff5662,#a90c28);clip-path:polygon(8% 100%,31% 24%,64% 0,98% 100%);transform:rotate(-17deg);filter:drop-shadow(0 2px 2px #0009);pointer-events:none}
 .avatar::after{content:"";position:absolute;z-index:5;left:-13%;top:1%;width:89%;height:20%;border-radius:99px;background:linear-gradient(#fff,#d9e8ed);transform:rotate(-17deg);box-shadow:0 2px 3px #0008;pointer-events:none}
-/* Kranzgirlanden an den Modus-Kacheln */
+/* Unterschiedliche, ins Feld haengende Girlanden */
 .card.action{position:relative;overflow:visible;border-color:#527365;box-shadow:0 8px 30px #0003,0 0 0 1px #2c614022}
-.card.action::before{content:"";position:absolute;z-index:2;top:-5px;left:11px;right:11px;height:18px;pointer-events:none;border-top:6px dotted #328458;border-radius:50%;filter:drop-shadow(0 2px 2px #061d10)}
-.card.action::after{content:"🔔  🎄  🔴  ✨";position:absolute;z-index:3;right:10px;top:-13px;font-size:14px;letter-spacing:2px;pointer-events:none;filter:drop-shadow(0 2px 2px #0008)}
-.card.action:hover{border-color:#f3c97e}
-.hero,.panel,.card{border-color:#476758}
-.eyebrow{color:#ffe0a0}
-/* Christbaumkugeln als Haengedeko bei Bereichen, aber nicht im Spielfeld */
-.hero{position:relative;overflow:visible}
-.hero::after{content:"🔴    🟡    🟢";position:absolute;right:12px;top:-5px;font-size:15px;letter-spacing:4px;pointer-events:none;opacity:.85}
-/* Spieltisch: Tannengrün am Rand, kein Overlay ueber Bechern */
+.card.action::before{content:"";position:absolute;top:-7px;left:-7px;width:66%;height:38px;z-index:3;pointer-events:none;border-top:8px dotted #328458;border-left:5px dotted #2b754b;border-radius:0 0 90% 20%;transform:rotate(-9deg);filter:drop-shadow(1px 2px 2px #041b0c)}
+.card.action::after{content:"🎄 🔔 🔴 🎁";position:absolute;top:9px;left:9px;z-index:4;pointer-events:none;font-size:clamp(12px,1.5vw,18px);letter-spacing:2px;transform:rotate(-9deg);filter:drop-shadow(1px 3px 3px #000a)}
+.card.action:nth-child(2n)::before{left:auto;right:-7px;transform:rotate(10deg);border-left:0;border-right:5px dotted #2b754b;border-radius:0 0 20% 90%}
+.card.action:nth-child(2n)::after{content:"🎁 🟡 🎄 🔔";left:auto;right:8px;transform:rotate(9deg)}
+.card.action:nth-child(3n)::after{content:"🔔 🎀 🎄 ✨"}.card.action:nth-child(4n)::after{content:"🎄 🔴 🔔 ⭐"}
+.card.action:hover{border-color:#f3c97e}.hero,.panel,.card{border-color:#476758}.eyebrow{color:#ffe0a0}
+.hero{position:relative;overflow:visible}.hero::after{content:"🔴  🟡  🟢";position:absolute;right:12px;top:-5px;font-size:15px;letter-spacing:4px;pointer-events:none;opacity:.85}
+/* Tischrand und groessere, perspektivisch versetzte Geschenke/Glocken.
+   Zentrale Becher und Touchflaechen bleiben frei. */
 .game-screen .matchstack{border-color:#497c5d!important;box-shadow:inset 0 0 0 2px #b9d7b533,0 0 0 2px #b14c4c66,0 8px 25px #0007!important}
 .game-screen .matchstack::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border:5px dotted #3c9a60;opacity:.65}
-.game-screen .matchstack::after{content:"🎄  🔔  🎁  🎄";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);z-index:3;pointer-events:none;font-size:clamp(11px,2.7vw,17px);letter-spacing:7px;opacity:.75;white-space:nowrap}
-.game-screen .table-side-label{position:relative;z-index:4}
-.game-screen .table-side-label::after{content:"❄️";font-size:15px;flex:none;opacity:.8}
-/* Buttons bleiben bedienbar und das dunkle Grunddesign bleibt sichtbar */
-@media(max-width:650px){.card.action::after{font-size:12px;letter-spacing:0}.brand::after{font-size:.42em;margin-left:4px}.game-screen .matchstack::after{font-size:11px;letter-spacing:3px}.top{padding-top:23px}}
+.game-screen .matchstack::after{content:"🎁 🎁 🎁                         🔔           🎁 🎄                    🎁 🎁         🔔                   🎄 🎁 🎁";position:absolute;inset:7% 5% 6%;z-index:3;pointer-events:none;display:flex;align-items:center;justify-content:space-between;white-space:normal;overflow:hidden;word-spacing:clamp(12px,3vw,36px);line-height:clamp(75px,13vh,170px);font-size:clamp(21px,3.5vw,40px);text-shadow:2px 5px 3px #000a,0 0 9px #ffcf6755;filter:drop-shadow(3px 5px 2px #0008);transform:perspective(550px) rotateX(13deg);opacity:.85}
+.game-screen .table-side-label{position:relative;z-index:4}.game-screen .table-side-label::after{content:"❄️";font-size:15px;flex:none;opacity:.8}
+/* Live-Match-Statistik: geschmueckter Rahmen, Header und Ecken */
+.live-stats-dialog{position:relative;overflow:hidden;border:2px solid #638c68;box-shadow:0 20px 70px #000b,0 0 25px #b9d47730}
+.live-stats-dialog::before{content:"🌿 🎄 🔔 🌿 🎁 🌿 🔴 🌿";position:absolute;top:0;left:0;right:0;height:24px;z-index:3;pointer-events:none;text-align:center;font-size:15px;letter-spacing:3px;white-space:nowrap;overflow:hidden;filter:drop-shadow(0 2px 3px #000b)}
+.live-stats-dialog::after{content:"🎁";position:absolute;bottom:5px;right:8px;z-index:3;pointer-events:none;font-size:23px;filter:drop-shadow(2px 3px 2px #000a);opacity:.85}
+.live-stats-heading{padding-top:23px;background:linear-gradient(110deg,#1a3a38,#172b40 62%,#43333a)}
+.live-stats-heading h2{text-shadow:0 0 12px #f6d18c66}
+@media(max-width:650px){.brand::after{font-size:.35em;margin-left:4px}.card.action::after{font-size:12px;letter-spacing:0}.game-screen .matchstack::after{font-size:clamp(17px,4vw,27px);word-spacing:9px;line-height:95px}.top{padding-top:23px}.live-stats-dialog::before{font-size:12px;letter-spacing:1px}}
 @media(prefers-reduced-motion:reduce){body::before,.top::before{animation:none}}
